@@ -1,54 +1,87 @@
+/* Fondo oscuro con corazones flotando */
 body {
   margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle, #ffe6f0, #ff99cc);
+  padding: 0;
+  background-color: #0d0d0d;
   overflow: hidden;
   font-family: 'Arial', sans-serif;
+  position: relative;
+  height: 100vh;
 }
 
-.contenedor {
+/* Animación de corazones */
+.heart {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  transform: rotate(45deg);
+  animation: float 6s linear infinite;
 }
 
-.corazon {
+.heart::before,
+.heart::after {
+  content: "";
   position: absolute;
-  font-size: 2rem;
-  animation: flotar 5s infinite ease-in;
-  color: red;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
 }
 
-.corazon:nth-child(1) { left: 20%; animation-delay: 0s; }
-.corazon:nth-child(2) { left: 40%; animation-delay: 1s; }
-.corazon:nth-child(3) { left: 60%; animation-delay: 2s; }
-.corazon:nth-child(4) { left: 80%; animation-delay: 3s; }
-.corazon:nth-child(5) { left: 50%; animation-delay: 4s; }
-
-@keyframes flotar {
-  0% { bottom: -10%; opacity: 0; transform: scale(0.5) rotate(0deg); }
-  50% { opacity: 1; }
-  100% { bottom: 110%; opacity: 0; transform: scale(1.5) rotate(360deg); }
+.heart::before {
+  top: -10px;
+  left: 0;
 }
 
-.mensajes {
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+/* Texto central "Te amo" */
+h1 {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6vw;
+  color: #fff;
+  text-shadow: 0 0 10px #ff1a75;
+  text-align: center;
 }
 
-.mensajes span {
-  position: absolute;
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
-  animation: latido 2s infinite ease-in-out;
-  text-shadow: 0 0 10px red;
+/* Animación de corazones subiendo */
+@keyframes float {
+  0% {
+    bottom: -10%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 110%;
+    opacity: 0;
+  }
 }
 
-@keyframes latido {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.2); opacity: 1; }
+/* Responsive: para que todo se ajuste en celular */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 8vw;
+    padding: 0 10px;
+  }
+
+  .heart {
+    width: 15px;
+    height: 15px;
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 15px;
+    height: 15px;
+  }
 }
+
